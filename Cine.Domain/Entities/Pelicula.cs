@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Cine.Domain.Entities;
 
-public partial class Pelicula
+public partial class Pelicula : BaseEntity
 {
-    public int PeliculaId { get; set; }
+    //public int PeliculaId { get; set; }
 
     public string? Titulo { get; set; }
 

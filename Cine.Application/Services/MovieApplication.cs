@@ -99,14 +99,60 @@ namespace Cine.Application.Services
             return response;
         }
 
-        public Task<BaseResponse<bool>> UpdateMovie(int movieId, MovieUpdateRequestDto movie)
+        public async Task<BaseResponse<bool>> UpdateMovie(int movieId, MovieUpdateRequestDto movieDto)
         {
-            throw new NotImplementedException();
+            var response = new BaseResponse<bool>();
+            var movieEdit = await GetMovieById(movieId);
+            if (movieEdit.Data is null)
+            {
+                response.isSuccess = false;
+                response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;
+            }
+
+            var movie = _mapper.Map<Pelicula>(movieDto);
+            movie.PeliculaId = movieId;
+            response.Data = await _unitOfWork.movie.EditMovie(movie);
+
+            if (response.Data == true)
+            {
+                response.isSuccess = true;
+                response.Message = ReplyMessage.MESSAGE_SAVE;
+            }
+            else
+            {
+                response.isSuccess = false;
+                response.Message = ReplyMessage.MESSAGE_FAILED;
+            }
+
+            return response;
         }
 
-        public Task<BaseResponse<bool>> RemoveMovie(int movieId)
+        public async Task<BaseResponse<bool>> RemoveMovie(int movieId)
         {
-            throw new NotImplementedException();
+            var response = new BaseResponse<bool>();
+            var movie = await GetMovieById(movieId);
+
+            if(movie.Data is null) 
+            {
+                response.isSuccess =false;
+                response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;
+            }
+            
+            response.Data = await _unitOfWork.movie.RemoveMovie(movieId);
+
+            if (response.Data)
+            {
+                response.isSuccess = true;
+                response.Message = ReplyMessage.MESSAGE_DELETE;
+            }
+            else
+            {
+                response.isSuccess = false;
+                response.Message= ReplyMessage.MESSAGE_FAILED;
+            }
+
+            return response;
+
         }
 
       

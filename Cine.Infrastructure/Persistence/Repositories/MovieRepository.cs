@@ -16,18 +16,16 @@ namespace Cine.Infrastructure.Persistence.Repositories
 {
     public class MovieRepository : GenericRepository<Pelicula>, IMovieRepository
     {
-        private readonly CineDbContext _dbConext ;
-
-        public MovieRepository(CineDbContext dbConext)
-        {
-            _dbConext = dbConext;
-        }
+       
+        public MovieRepository(CineDbContext dbConext) : base(dbConext) { }
          
         public async Task<BaseEntityResponse<Pelicula>> ListMovies(BaseFiltersRequest filters)
         {
             var response = new BaseEntityResponse<Pelicula>();
 
-            var movies = (from c in _dbConext.Peliculas select c).AsNoTracking().AsQueryable();
+            //var movies = (from c in _dbConext.Peliculas select c).AsNoTracking().AsQueryable();
+
+            var movies = GetEntryQuery();
 
             if(filters.NumFilter is not null && !string.IsNullOrEmpty(filters.TextFilter))
             {
@@ -59,6 +57,7 @@ namespace Cine.Infrastructure.Persistence.Repositories
             return response;
         }
 
+        /*
         public async Task<IEnumerable<Pelicula>> ListSelectedMovies()
         {
             var movies = await _dbConext.Peliculas.Where(x => x.FechaEstreno <= DateTime.Today).AsNoTracking().ToListAsync();
@@ -67,7 +66,7 @@ namespace Cine.Infrastructure.Persistence.Repositories
 
         public async Task<Pelicula> MovieByID(int id)
         {
-           var movie = await _dbConext.Peliculas.FirstOrDefaultAsync(x => x.PeliculaId.Equals(id));
+           var movie = await _dbConext.Peliculas.FirstOrDefaultAsync(x => x.Id.Equals(id));
            return movie!;
         }
 
@@ -89,12 +88,12 @@ namespace Cine.Infrastructure.Persistence.Repositories
 
         public async Task<bool> RemoveMovie(int id)
         {
-            var movie = await _dbConext.Peliculas.AsNoTracking().SingleOrDefaultAsync(x => x.PeliculaId.Equals(id));
+            var movie = await _dbConext.Peliculas.AsNoTracking().SingleOrDefaultAsync(x => x.Id.Equals(id));
 
-            _dbConext.Update(movie);
+            _dbConext.Remove(movie);
             
             var recordsAffeced = await _dbConext.SaveChangesAsync();
             return recordsAffeced > 0;
-        }
+        }*/
     }
 }

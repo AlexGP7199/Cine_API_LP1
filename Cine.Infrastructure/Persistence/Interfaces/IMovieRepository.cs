@@ -12,11 +12,12 @@ namespace Cine.Infrastructure.Persistence.Interfaces
     public interface IMovieRepository
     {
         Task<BaseEntityResponse<Pelicula>> ListMovies(BaseFiltersRequest request);
-        Task<IEnumerable<Pelicula>> ListSelectedMovies();
+        //Task<IEnumerable<Pelicula>> ListSelectedMovies();
+        /*
         Task<Pelicula> MovieByID(int id);
         Task<bool> AddMovie(Pelicula movie);
         Task<bool> EditMovie(Pelicula movie);
-        Task<bool> RemoveMovie(int id);
+        Task<bool> RemoveMovie(int id); */
         
     }
 }
