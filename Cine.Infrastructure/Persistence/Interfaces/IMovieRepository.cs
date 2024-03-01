@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Cine.Infrastructure.Persistence.Interfaces
 {
-    public interface IMovieRepository
+    public interface IMovieRepository : IGenericRepository<Pelicula>
     {
         Task<BaseEntityResponse<Pelicula>> ListMovies(BaseFiltersRequest request);
         //Task<IEnumerable<Pelicula>> ListSelectedMovies();

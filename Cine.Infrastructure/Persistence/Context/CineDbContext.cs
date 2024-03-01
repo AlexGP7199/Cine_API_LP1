@@ -28,7 +28,7 @@ public partial class CineDbContext : DbContext
 
             //entity.HasKey(e => e.PeliculaId).HasName("PK__Pelicula__5AC6F32CC1052ECB");
 
-            entity.Property(e => e.PeliculaId).HasColumnName("PeliculaID");
+            //entity.Property(e => e.PeliculaId).HasColumnName("PeliculaID");
             entity.Property(e => e.Clasificacion).HasMaxLength(50);
             entity.Property(e => e.Descripcion).HasColumnType("text");
             entity.Property(e => e.Director).HasMaxLength(255);

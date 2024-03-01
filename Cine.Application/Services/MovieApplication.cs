@@ -53,7 +53,7 @@ namespace Cine.Application.Services
         public async Task<BaseResponse<MovieResponseDto>> GetMovieById(int id)
         {
             var response = new BaseResponse<MovieResponseDto>();
-            var movies = await _unitOfWork.movie.MovieByID(id);
+            var movies = await _unitOfWork.movie.GetByIdAsync(id);
 
             if( movies != null )
             {
@@ -82,7 +82,7 @@ namespace Cine.Application.Services
             }
 
             var movie = _mapper.Map<Pelicula>(movieDto);
-            response.Data = await _unitOfWork.movie.AddMovie(movie);
+            response.Data = await _unitOfWork.movie.RegisterAsync(movie);
 
             if(response.Data == true )
             {
@@ -110,8 +110,8 @@ namespace Cine.Application.Services
             }
 
             var movie = _mapper.Map<Pelicula>(movieDto);
-            movie.PeliculaId = movieId;
-            response.Data = await _unitOfWork.movie.EditMovie(movie);
+            movie.Id = movieId;
+            response.Data = await _unitOfWork.movie.EditAsync(movie);
 
             if (response.Data == true)
             {
@@ -138,7 +138,7 @@ namespace Cine.Application.Services
                 response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;
             }
             
-            response.Data = await _unitOfWork.movie.RemoveMovie(movieId);
+            response.Data = await _unitOfWork.movie.RemoveAsync(movieId);
 
             if (response.Data)
             {

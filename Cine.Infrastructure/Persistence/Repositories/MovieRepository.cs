@@ -50,7 +50,7 @@ namespace Cine.Infrastructure.Persistence.Repositories
                 movies = movies.Where(x => x.FechaEstreno >= Convert.ToDateTime(filters.StartDate) && x.FechaEstreno <= Convert.ToDateTime(filters.EndDate).AddDays(1));
             }
 
-            if (filters.Sort is null) filters.Sort = "PeliculaId";
+            if (filters.Sort is null) filters.Sort = "Id";
 
             response.TotalRecords = await movies.CountAsync();
             response.Items = await Ordering(filters, movies, true).ToListAsync();
