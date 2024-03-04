@@ -17,7 +17,7 @@ namespace Cine.API.Controllers
             _movieApplication = movieApplication;
         }
 
-        [HttpPost("Filtros")]
+        [HttpPost("ObtenerPorFiltros")]
         public async Task<IActionResult> ListMovies([FromBody] BaseFiltersRequest _filters)
         {
             var response = await _movieApplication.ListMovies(_filters);

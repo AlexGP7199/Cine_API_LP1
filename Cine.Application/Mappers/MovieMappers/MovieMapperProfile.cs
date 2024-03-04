@@ -20,7 +20,7 @@ namespace Cine.Application.Mappers.MovieMappers
             CreateMap<Pelicula, MovieResponseDto>()
                 .ForMember(x=> x.PeliculaId , x => x.MapFrom(y=> y.Id))
                 .ReverseMap();
-            CreateMap<BaseEntityResponse<MovieResponseDto>, BaseEntityResponse<Pelicula>>();
+            CreateMap<BaseEntityResponse<MovieResponseDto>, BaseEntityResponse<Pelicula>>().ReverseMap();
                 
         }
     }
