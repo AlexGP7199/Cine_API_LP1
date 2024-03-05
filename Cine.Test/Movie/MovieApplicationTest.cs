@@ -3,7 +3,7 @@ using Cine.Application.Interfaces;
 using Cine.Utilities.Static;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Cine.Test.Movie
@@ -11,7 +11,6 @@ namespace Cine.Test.Movie
     [TestClass]
     public class MovieApplicationTest
     {
-
         // Pendiente de Fix
         private static WebApplicationFactory<Program>? _factory = null;
         private static IServiceScopeFactory? _scopeFactory = null;
@@ -21,7 +20,7 @@ namespace Cine.Test.Movie
         {
             _factory = new CustomWebApplicationFactory();
             _scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
-        }
+        } 
 
         [TestMethod]
         public async Task RegisterMovie_WhenSenNullValueOrEmpty_ValidationErrors()

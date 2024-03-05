@@ -18,7 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Cine.API\Cine.API.csproj" />
     <ProjectReference Include="..\Cine.Application\Cine.Application.csproj" />
+    <ProjectReference Include="..\Cine.Domain\Cine.Domain.csproj" />
+    <ProjectReference Include="..\Cine.Infrastructure\Cine.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
